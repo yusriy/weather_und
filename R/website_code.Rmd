@@ -119,7 +119,7 @@ dws_p <- ggplot(wd, aes(time,wspd)) +
   geom_line(col="darkblue",size=2) +       
   ylab("km/h\n")+
   xlab("Hour (local time)")+
-  scale_y_continuous(limits=c(0,10))+
+  scale_y_continuous(limits=c(0,100))+
   theme_bw()+
   theme(plot.title = element_text(lineheight=1.2, face="bold",size = 16, colour = "grey20"),
         panel.border = element_rect(colour = "black",fill=F,size=1),
