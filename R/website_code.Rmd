@@ -1,7 +1,7 @@
 ---
-title: "`r format(Sys.time(), '%d %B, %Y')` (Weather Today)"
+title: "`r format(Sys.time() - (24 * 60 * 60), '%d %B, %Y')` (Weather Yesterday)"
 author: "Yusri Yusup"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time() - (24 * 60 * 60), '%d %B, %Y')`"
 output: html_document
 ---
 
@@ -11,7 +11,7 @@ Weather parameters from **Environmental Technology Personal Weather Station (PWS
 
 **Edited:** Yusri Yusup (http://sites.google.com/site/yusriyp)
 
-**Date modified:** 2015-06-27
+**Date modified:** 2015-08-14
 
 
 Weather station maintained by:
@@ -56,7 +56,7 @@ library(Hmisc)
 # * Relative humidity (%)
 
 station.id="IPULAUPI4"
-date=strftime(as.POSIXct(Sys.Date()),format='%Y-%m-%d')
+date=strftime(as.POSIXct(Sys.Date()) - (24 * 60 * 60),format='%Y-%m-%d')
 
 #### 3. Download detailed weather station data ##############################
 
@@ -119,7 +119,7 @@ dws_p <- ggplot(wd, aes(time,wspd)) +
   geom_line(col="darkblue",size=2) +       
   ylab("km/h\n")+
   xlab("Hour (local time)")+
-  scale_y_continuous(limits=c(0,100))+
+  scale_y_continuous(limits=c(0,200))+
   theme_bw()+
   theme(plot.title = element_text(lineheight=1.2, face="bold",size = 16, colour = "grey20"),
         panel.border = element_rect(colour = "black",fill=F,size=1),
@@ -149,7 +149,7 @@ dwd_p <-  ggplot(data = dw, aes(x = time, y = 0)) +
   geom_segment(aes(xend = time + u*360, yend = v), arrow = arrow(length = unit(0.15, "cm")), size = 0.5) + 
   geom_point(data = subset(dw, !is.na(u)), alpha = 0.5,size=1) +
   ggtitle("Wind vectors\n") + xlab("Hour (local time)") +
-  scale_y_continuous(name = "Wind Vectors (km/h)\n", labels = v_labels, breaks = v_breaks)+
+  scale_y_continuous(name = "Wind Vectors (km/h)\n", labels = v_labels, breaks = v_breaks, limits=c(-100,100))+
   theme(plot.title = element_text(lineheight=1.2, face="bold",size = 16, colour = "grey20"),
         panel.border = element_rect(colour = "black",fill=F,size=1),
         panel.grid.major = element_line(colour = "grey",size=0.25,linetype='longdash'),
