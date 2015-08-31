@@ -21,7 +21,7 @@ Weather station maintained by:
 *Environmental Technology,*
 *School of Industrial Technology,*
 *Universiti Sains Malaysia (USM),*
-*Penang, Malaysia*
+*Pulau Pinang, Malaysia*
 
 
 List of parameters:
@@ -87,6 +87,26 @@ wd$hum[which(wd$hum < 0 | wd$hum > 100)]  <- NA # Humidity cannot be < 0 or > 10
 
 ```
 
+### Summary of weather data
+
+Summary of weather data
+
+* tempc = temperature (deg C)
+* wspd = wind speed (km/h)
+* wdd = wind direction (deg)
+* hum = relative humidity (%)
+
+```{r, echo=TRUE,warning=FALSE}
+
+summary(wd$tempc)
+
+summary(wd$wspd)
+
+summary(wd$wdd)
+
+summary(wd$hum)
+
+```
 ### Temperature
 
 ```{r, echo=FALSE,warning=FALSE}
@@ -119,7 +139,7 @@ dws_p <- ggplot(wd, aes(time,wspd)) +
   geom_line(col="darkblue",size=2) +       
   ylab("km/h\n")+
   xlab("Hour (local time)")+
-  scale_y_continuous(limits=c(0,200))+
+  scale_y_continuous(limits=c(0,max(wd$wspd,na.rm=TRUE)))+
   theme_bw()+
   theme(plot.title = element_text(lineheight=1.2, face="bold",size = 16, colour = "grey20"),
         panel.border = element_rect(colour = "black",fill=F,size=1),
