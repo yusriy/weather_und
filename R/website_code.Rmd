@@ -205,6 +205,8 @@ dh_p <-  ggplot(wd, aes(time, hum)) +
 
 dh_p
 
+## Delete the previous values
+rm(list=ls())
 
 ```
 
